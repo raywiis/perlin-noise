@@ -1,4 +1,4 @@
-const gradients = new Map<string, number>();
+const gradients = new Map<string, [number, number]>();
 const key = (x: number, y: number): string => `${x},${y}`;
 
 const canvas = document.createElement('canvas');
@@ -10,15 +10,17 @@ function lerp(v0, v1, t) {
   return v0 * (1 - t) + v1 * t;
 }
 
-const scale = 100;
+const scale = 20;
 const getGradient = (x: number, y: number): [number, number] => {
   const known = gradients.get(key(x, y));
   if (known) {
-    return [Math.sin(known), Math.cos(known)];
+    return known;
   }
-  const niu = Math.random();
+  const r = Math.random() * 2 * Math.PI;
+  const niu: [number, number] = [Math.sin(r), Math.cos(r)];
+
   gradients.set(key(x, y), niu);
-  return [Math.sin(niu), Math.cos(niu)];
+  return niu;
 };
 
 const dotProduct = (x1: number, y1: number, x2: number, y2: number): number => {
