@@ -10,7 +10,7 @@ function lerp(v0, v1, t) {
   return v0 * (1 - t) + v1 * t;
 }
 
-const scale = 20;
+const scale = 10;
 const getGradient = (x: number, y: number): [number, number] => {
   const known = gradients.get(key(x, y));
   if (known) {
